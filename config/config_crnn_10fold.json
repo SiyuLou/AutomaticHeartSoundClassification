@@ -1,0 +1,62 @@
+{
+    "name": "Pysionet_CRNN_5fold",
+    "n_gpu": 1,
+
+    "arch": {
+        "type": "crnn",
+        "args": {
+            "in_channel":3,
+            "hidden_dim":256, 
+            "num_layers":2,
+            "dropout":0.2,
+            "pooling":"first",
+            "model":"lstm",
+            "BN":true,
+            "num_classes":2}
+    },
+    "data_loader": {
+        "type": "HeartSoundDataLoader",
+        "full_label_csv": "data/label.csv",
+        "args":{
+            "fea_path" : "data/mel_128.h5",
+            "duration": 5,
+            "batch_size": 64,
+            "delta":true,
+            "norm" :true,
+            "shuffle": false,
+            "validation_split": 0.1,
+            "num_workers": 2
+        }
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args":{
+            "lr": 0.0002,
+            "weight_decay": 0,
+            "amsgrad": true
+        }
+    },
+    "loss": "ce_loss",
+    "metrics": [
+        "accuracy"
+    ],
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "step_size": 20,
+            "gamma": 0.9
+        }
+    },
+    "trainer": {
+        "epochs": 200,
+
+        "save_dir": "saved/",
+        "save_period": 1,
+        "verbosity": 2,
+        
+        "monitor": "max val_MAcc",
+        "early_stop": 20,
+
+        "tensorboard": true
+    }
+}
