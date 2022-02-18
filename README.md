@@ -1,4 +1,4 @@
-#Project: Automatic Heart Sound Classification
+# Project: Automatic Heart Sound Classification
 
 This repository contains implementations of different deep learning networks which can efficiently classify normal/abnormal heartsound with only PCG (Phonocardiography) input. The framework is based on [pytorch-template](https://github.com/victoresque/pytorch-template).
 
@@ -12,32 +12,41 @@ Below is the scores of the challenge[^1]
 
 ![challenge score](image/benchmark.png)
 
-As no official datasplit was provided, we use train_test_split from sklearn.model_selection to split the data into train(80%), val(10%) and test(10%). By following command, you can train a single fold model, and a {train.csv} and {test.csv} will be automatically generated under {data/}. 
-{python train.py -c config/config_crnn.json.json}
+As no official data splits were provided, we use train_test_split from sklearn.model_selection to split the data into train(80%), val(10%) and test(10%). By following command, you can train a single fold model, and a `train.csv` and `test.csv` will be automatically generated under `data/`. 
+
+```bash
+python train.py -c config/config_crnn.json.json
+```
 
 A k-fold validation framework is also implemented.
 
-{python train_fold_validation.py -c config/config_crnn.json}
-
+```bash
+python train_fold_validation.py -c config/config_crnn.json
+```
 
 ## Audio Preprocess & Feature Extraction
 - The fifth order Butterworth band-pass filter was applied to remove low-frequency artifacts, baseline wandering as well as high-frequency inference.
 Log-Mel Spectrogram with 128 Mel-bins were selected in the experiment. 
 - No extra segmentation was applied in this work.
-- Log-Mel Spectrogram with 128 Mel-bins are selected as the input features. File to extract features can be find in {utils/audio_feature_extractor.py}.
+- Log-Mel Spectrogram with 128 Mel-bins are selected as the input features. File to extract features can be find in `utils/audio_feature_extractor.py`.
 
 ## Models
 Four different types of neural networks were adopted in the project. The structures of each type are illustrated below:
 
 ### simple_cnn
+
 ![simmple_cnn structure](image/heartsound-simple_cnn.drawio.png)
 
 ### VGG_like CNN
+
 ![VGG_like 11 layer CNN structure](image/heartsound-VGG-like-CNN.drawio.png)
+
 ### BiLSTM
+
 ![Bidirectional LSTM structure](image/heartsound-LSTM.drawio.png)
 
 ### CRNN
+
 ![CRNN structure](image/heartsound-CRNN.drawio.png)
 
 ## Validation metrics
@@ -76,7 +85,8 @@ Four different types of neural networks were adopted in the project. The structu
 |Average    |0.899   |0.896      |0.910      |0.903  |0.933      |  
 
 requirements
-'''
+
+```bash
 gensim==4.1.2
 h5py==2.10.0
 librosa==0.8.1
@@ -101,4 +111,4 @@ torch==1.10.0
 tqdm==4.62.2
 urllib3==1.26.6
 zsvision==0.7.12
-'''
+```
