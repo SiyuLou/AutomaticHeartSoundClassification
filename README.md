@@ -53,12 +53,13 @@ Four different types of neural networks were adopted in the project. The structu
 
 ![confusion_matrix](image/confusion_matrix.png)
 
-- $$Accuracy = (TP + TN) \ (TP + FN + FP + TN)$$
-- $$Sensitivity = TP \ (TP + FN) $$
-- $$Sensitivity = TN \ (FP + TN) $$
-- $$MAcc = (Sensitivity + Specificity) \ 2 $$
-- $$F1 Score = 2 * TP \ (2 * TP + FP + FN)$$
-
+```bash
+Accuracy = (TP + TN) \ (TP + FN + FP + TN)
+Sensitivity = TP \ (TP + FN) 
+Specificity = TN \ (FP + TN) 
+MAcc = (Sensitivity + Specificity) \ 2 
+F1_Score = 2 * TP \ (2 * TP + FP + FN)
+```
 ## Results
 
 | Model     |Model size|Accuracy|Sensitivity|Specificity|MAcc   | F1 Score  |
